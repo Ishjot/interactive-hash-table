@@ -1,9 +1,9 @@
-#include "HashTable.h"
 #include <iostream>
-
-using namespace std;
+#include "HashTable.h"
 
 #define TABLE_SIZE 5
+
+using namespace std;
 
 int hash(int key)
 {
@@ -33,6 +33,8 @@ void HashTable::insert(int key, Student value)
     delete table[index];
 
   table[index] = new HashEntry(key, value);
+
+  cout << "item successfully inserted" << endl;
 
 }
 

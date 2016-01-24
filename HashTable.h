@@ -9,7 +9,7 @@ class HashTable
     HashEntry **table;
 
   public:
-    HashTable ();
+    HashTable();
 
     void insert(int key, Student value);
 
