@@ -1,11 +1,11 @@
-// Hashtable Project
-
 #include <iostream>
 #include <exception>
 #include <string>
 #include <cstdio>
-#include "Hashtable.h"
+#include "HashTable.h"
+#include "HashEntry.h"
 #include "Student.h"
+
 using namespace std;
 
 int main()
@@ -15,7 +15,7 @@ int main()
 
 	try
 	{
-		Hashtable<Student> h;
+		HashTable h;
 
 		while(true)
 		{
@@ -25,18 +25,18 @@ int main()
 			{
 				break;
 			}
-			if(str.compare("exit") == 0)
-			{
-				break;
-			}
-			else if(str.compare("linearprobing") == 0)
-			{
-				h.setMode(1);
-			}
-			else if(str.compare("doublehashing") == 0)
-			{
-				h.setMode(2);
-			}
+//			if(str.compare("exit") == 0)
+//			{
+//				break;
+//			}
+//			else if(str.compare("linearprobing") == 0)
+//			{
+//				h.setMode(1);
+//			}
+//			else if(str.compare("doublehashing") == 0)
+//			{
+//				h.setMode(2);
+//			}
 			else if(str.compare("insert") == 0)
 			{
 				int key;
@@ -46,18 +46,18 @@ int main()
 				Student tmp(name, gpa);
 				h.insert(key, tmp);
 			}
-			else if(str.compare("lookup") == 0)
-			{
-				int key;
-				cin >> key;
-				h.lookup(key);
-			}
-			else if(str.compare("delete") == 0)
-			{
-				int key;
-				cin >> key;
-				h.remove(key);
-			}
+//			else if(str.compare("lookup") == 0)
+//			{
+//				int key;
+//				cin >> key;
+//				h.lookup(key);
+//			}
+//			else if(str.compare("delete") == 0)
+//			{
+//				int key;
+//				cin >> key;
+//				h.remove(key);
+//			}
 			else if(str.compare("print") == 0)
 			{
 				h.print();

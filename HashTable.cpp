@@ -1,0 +1,63 @@
+#include "HashTable.h"
+#include <iostream>
+
+using namespace std;
+
+#define TABLE_SIZE 5
+
+int hash(int key)
+{
+
+  return ( (key % 492113) % TABLE_SIZE );
+
+}
+
+HashTable::HashTable()
+{
+
+  table = new HashEntry * [TABLE_SIZE];
+  for(int i = 0; i < TABLE_SIZE; i++)
+    table[i] = NULL;
+
+}
+
+
+void HashTable::insert(int key, Student value)
+{
+
+  int index = hash(key);
+  while(table[index] != NULL && table[index]->getKey() != key)
+    index = (index + 1) % TABLE_SIZE;
+
+  if (table[index] != NULL)
+    delete table[index];
+
+  table[index] = new HashEntry(key, value);
+
+}
+
+void HashTable::print()
+{
+
+  for(int i = 0; i < TABLE_SIZE; i++)
+  {
+
+    if(table[i] != NULL)
+      cout << "Student at index " << i << " is " << table[i]->getValue().getName() << " " << table[i]->getValue().getGPA() << endl;
+  
+  }
+
+}
+
+HashTable::~HashTable()
+{
+
+  for(int i = 0; i < TABLE_SIZE; i++)
+  {
+    if(table[i] != NULL)
+      delete table[i];
+  }
+
+  delete[] table;
+
+}
