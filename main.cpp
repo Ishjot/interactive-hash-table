@@ -25,10 +25,10 @@ int main()
 			{
 				break;
 			}
-//			if(str.compare("exit") == 0)
-//			{
-//				break;
-//			}
+			if(str.compare("exit") == 0)
+			{
+				break;
+			}
 //			else if(str.compare("linearprobing") == 0)
 //			{
 //				h.setMode(1);
@@ -46,12 +46,12 @@ int main()
 				Student tmp(name, gpa);
 				h.insert(key, tmp);
 			}
-//			else if(str.compare("lookup") == 0)
-//			{
-//				int key;
-//				cin >> key;
-//				h.lookup(key);
-//			}
+			else if(str.compare("lookup") == 0)
+			{
+				int key;
+				cin >> key;
+				h.lookup(key);
+			}
 //			else if(str.compare("delete") == 0)
 //			{
 //				int key;

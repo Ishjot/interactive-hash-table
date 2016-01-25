@@ -38,6 +38,21 @@ void HashTable::insert(int key, Student value)
 
 }
 
+void HashTable::lookup(int key)
+{
+
+  int index = hash(key);
+  while(table[index] != NULL && table[index]->getKey() != key)
+    index = (index + 1) % TABLE_SIZE;
+
+  if (table[index] == NULL)
+    cout << "item not present in the table" << endl;
+
+  else
+    cout << "item found; " << table[index]->getValue().getName() << " " << table[index]->getValue().getGPA() << endl;
+  
+}
+
 void HashTable::print()
 {
 

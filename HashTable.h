@@ -13,7 +13,7 @@ class HashTable
 
     void insert(int key, Student value);
 
-//    Student lookup const (int key);
+    void lookup (int key);
 
     void print();
 
