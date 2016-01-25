@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "HashTable.h"
 
 using namespace std;
@@ -9,6 +10,37 @@ int hash(int key)
   return ( (key % 492113) % TABLE_SIZE );
 
 }
+
+bool isPrime(int num)
+{
+
+  for(int i = 1.0; i <= sqrt(num); i++)
+  {
+    if(i%num == 0)
+      return false;
+  }
+
+  return true;
+
+}
+
+int findNextPrime(int num)
+{
+
+  while(!isPrime(num))
+    num += 2;
+
+  return num;
+
+}
+
+int findPrimeTwiceAsLargeAs(int num)
+{
+
+  int candidate = num*2 + 1;
+  return findNextPrime(candidate);
+
+} 
 
 HashTable::HashTable()
 {
