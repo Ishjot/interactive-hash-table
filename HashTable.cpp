@@ -4,20 +4,6 @@
 
 using namespace std;
 
-int hash(int key)
-{
-
-  return ( (key % 492113) % TABLE_SIZE );
-
-}
-
-int hash2(int key)
-{
-
-  return ( (key % 
-
-}
-
 bool isPrime(int num)
 {
 
@@ -47,7 +33,22 @@ int findPrimeTwiceAsLargeAs(int num)
   int candidate = num*2 + 1;
   return findNextPrimeOdd(candidate);
 
-} 
+}
+
+int HashTable::hash(int key)
+{
+
+  return ( (key % 492113) % TABLE_SIZE );
+
+}
+  
+int HashTable::hash2(int key)
+{
+  
+  return ( (key % 392113) % TABLE_SIZE );
+
+}
+ 
 
 HashTable::HashTable()
 {
@@ -63,7 +64,7 @@ HashTable::HashTable(int size)
 {
 
   table = new HashEntry * [size];
-  for(int i = 0; i < size; i++;)
+  for(int i = 0; i < size; i++)
     table[i] = NULL;
 
 }
@@ -137,11 +138,15 @@ void HashTable::reHash()
 {
 
   int newSize = findPrimeTwiceAsLargeAs(TABLE_SIZE);
-  newTable = new HashTable(newSize);
+  HashEntry **newTable = new HashEntry * [newSize];
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     if(table[i] != NULL && table[i]->getKey() != -1)
+      newTable.insert( table[i]->getKey(),  table[i]->getValue() );
+  }
 
+  delete [] table;
+  table = newTable;
 
 }
 

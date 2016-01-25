@@ -13,6 +13,11 @@ class HashTable
     int used;
 
   public:
+
+    int hash(int key);
+
+    int hash2(int key);
+
     HashTable();
 
     HashTable(int size);
