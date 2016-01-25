@@ -11,6 +11,13 @@ int hash(int key)
 
 }
 
+int hash2(int key)
+{
+
+  return ( (key % 
+
+}
+
 bool isPrime(int num)
 {
 
@@ -24,7 +31,7 @@ bool isPrime(int num)
 
 }
 
-int findNextPrime(int num)
+int findNextPrimeOdd(int num)
 {
 
   while(!isPrime(num))
@@ -38,7 +45,7 @@ int findPrimeTwiceAsLargeAs(int num)
 {
 
   int candidate = num*2 + 1;
-  return findNextPrime(candidate);
+  return findNextPrimeOdd(candidate);
 
 } 
 
@@ -130,7 +137,11 @@ void HashTable::reHash()
 {
 
   int newSize = findPrimeTwiceAsLargeAs(TABLE_SIZE);
-  HashTable reHashed = new HashTable(newSize);
+  newTable = new HashTable(newSize);
+  for(int i = 0; i < TABLE_SIZE; i++)
+  {
+    if(table[i] != NULL && table[i]->getKey() != -1)
+
 
 }
 
