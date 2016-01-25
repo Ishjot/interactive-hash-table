@@ -11,7 +11,9 @@ class HashEntry
 
   public:
     HashEntry(int key, Student value) : key(key), value(value) {}
-    const int getKey () const { return key; }
+    void setKey(int key) { this->key = key; }
+    void setValue(Student Value) { this->value = value; }
+    const int getKey() const { return key; }
     const Student getValue() const { return value; }
 };
 

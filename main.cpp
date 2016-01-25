@@ -52,12 +52,12 @@ int main()
 				cin >> key;
 				h.lookup(key);
 			}
-//			else if(str.compare("delete") == 0)
-//			{
-//				int key;
-//				cin >> key;
-//				h.remove(key);
-//			}
+			else if(str.compare("delete") == 0)
+			{
+				int key;
+				cin >> key;
+				h.remove(key);
+			}
 			else if(str.compare("print") == 0)
 			{
 				h.print();

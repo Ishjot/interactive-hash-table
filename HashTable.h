@@ -8,14 +8,24 @@ class HashTable
   private:
     HashEntry **table;
 
+    int TABLE_SIZE;
+
+    int used;
+
   public:
     HashTable();
 
+    HashTable(int size);
+
     void insert(int key, Student value);
+
+    void remove(int key);
 
     void lookup (int key);
 
     void print();
+
+    void reHash();
 
     ~HashTable();
 };
