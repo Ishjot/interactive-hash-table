@@ -24,8 +24,8 @@ HashTable::HashTable(int size)
 {
 
   table = new HashEntry * [size];
-  for(int i = 0; i < size; i++;
-  
+  for(int i = 0; i < size; i++;)
+    table[i] = NULL;
 
 }
 
@@ -98,7 +98,7 @@ void HashTable::reHash()
 {
 
   int newSize = findPrimeTwiceAsLargeAs(TABLE_SIZE);
-  HashTable reHashed = new HashTable();
+  HashTable reHashed = new HashTable(newSize);
 
 }
 
