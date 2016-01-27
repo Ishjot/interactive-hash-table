@@ -7,7 +7,7 @@ using namespace std;
 bool isPrime(int num)
 {
 
-  for(int i = 1.0; i <= sqrt(num); i++)
+  for(int i = 2.0; i <= (sqrt(num) + 1); i++)
   {
     if(i%num == 0)
       return false;
@@ -138,7 +138,8 @@ void HashTable::reHash()
 {
 
   int newSize = findPrimeTwiceAsLargeAs(TABLE_SIZE);
-  HashEntry **newTable = new HashEntry * [newSize];
+  HashTable newTable(newSize);
+  
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     if(table[i] != NULL && table[i]->getKey() != -1)
