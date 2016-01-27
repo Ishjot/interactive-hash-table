@@ -18,8 +18,6 @@ class HashTable
 
     int hash2(int key);
 
-    void reHashHelper(HashEntry **table, int size, int key, Student value);
-
     HashTable();
 
     HashTable(int size);

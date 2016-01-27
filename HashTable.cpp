@@ -49,10 +49,10 @@ int HashTable::hash2(int key)
 
 }
  
-void HashTable::reHashHelper(HashEntry **table, int size, int key, Student value)
+void reHashHelper(HashEntry **table, int size, int key, Student value)
 {
 
-  int index = hash(key);
+  int index = ( (key % 492113) % size );
   while( (table[index] != NULL && table[index]->getKey() != -1) && table[index]->getKey() != key)
     index = (index + 1) % size;
 
