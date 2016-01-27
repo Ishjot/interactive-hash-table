@@ -49,6 +49,18 @@ int HashTable::hash2(int key)
 
 }
  
+void HashTable::reHashHelper(HashEntry **table, int size, int key, Student value)
+{
+
+  int index = hash(key);
+  while( (table[index] != NULL && table[index]->getKey() != -1) && table[index]->getKey() != key)
+    index = (index + 1) % size;
+
+  if( table[index] != NULL ) 
+    delete table[index];
+
+  table[index] = new HashEntry(key, value);
+}
 
 HashTable::HashTable()
 {
@@ -71,6 +83,8 @@ HashTable::HashTable(int size)
 
 void HashTable::insert(int key, Student value)
 {
+
+  used++;
 
   if(used/(double)TABLE_SIZE >= 0.7)
     reHash(); 
@@ -102,6 +116,7 @@ void HashTable::remove(int key)
   {
     table[index]->setKey(-1);
     cout << "item successfully deleted" << endl;
+    used--;
   }
 
 }
@@ -138,16 +153,24 @@ void HashTable::reHash()
 {
 
   int newSize = findPrimeTwiceAsLargeAs(TABLE_SIZE);
-  HashTable newTable(newSize);
+  HashEntry **newTable = new HashEntry * [newSize];
   
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     if(table[i] != NULL && table[i]->getKey() != -1)
-      newTable.insert( table[i]->getKey(),  table[i]->getValue() );
+      reHashHelper( newTable, newSize, table[i]->getKey(), table[i]->getValue() );
   }
 
-  delete [] table;
+  for(int i = 0; i< TABLE_SIZE; i++)
+  {
+    if( table[i] != NULL)
+      delete table[i];
+  }
+
   table = newTable;
+  TABLE_SIZE = newSize;
+
+  cout << "table doubled" << endl;
 
 }
 

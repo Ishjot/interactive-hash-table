@@ -18,6 +18,8 @@ class HashTable
 
     int hash2(int key);
 
+    void reHashHelper(HashEntry **table, int size, int key, Student value);
+
     HashTable();
 
     HashTable(int size);
@@ -31,6 +33,10 @@ class HashTable
     void print();
 
     void reHash();
+
+    int getTableSize() const { return TABLE_SIZE; }
+
+    int getUsed() const { return used; }
 
     ~HashTable();
 };

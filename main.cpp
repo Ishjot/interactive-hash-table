@@ -62,6 +62,14 @@ int main()
 			{
 				h.print();
 			}
+      else if(str.compare("size") == 0)
+      {
+        cout << h.getTableSize() << endl;
+      }
+      else if(str.compare("used") == 0)
+      {
+        cout << h.getUsed() << endl;
+      }
 			else
 			{
 				cin.clear();
