@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <iomanip>
-#include "HashTable.h"
+#include "Hashtable.h"
 
 using namespace std;
 
