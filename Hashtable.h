@@ -1,7 +1,21 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include "HashEntry.h"
+#include "Student.h"
+
+class HashEntry
+{
+  private:
+    int key;
+    Student value;
+
+  public:
+    HashEntry(int key, Student value) : key(key), value(value) {}
+    void setKey(int key) { this->key = key; }
+    void setValue(Student Value) { this->value = value; }
+    const int getKey() const { return key; }
+    const Student getValue() const { return value; }
+};
 
 class HashTable
 {
@@ -43,20 +57,6 @@ class HashTable
     void setMode(int mode) { this->mode = mode; }
 
     ~HashTable();
-};
-
-class HashEntry
-{
-  private:
-    int key;
-    Student value;
-
-  public:
-    HashEntry(int key, Student value) : key(key), value(value) {}
-    void setKey(int key) { this->key = key; }
-    void setValue(Student Value) { this->value = value; }
-    const int getKey() const { return key; }
-    const Student getValue() const { return value; }
 };
 
 #endif
