@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <iomanip>
 #include "HashTable.h"
 
 using namespace std;
@@ -86,6 +87,22 @@ HashTable::HashTable(int size)
 void HashTable::insert(int key, Student value)
 {
 
+  bool doesExist = false;
+  for(int i = 0; i < TABLE_SIZE - 1; i++)
+  {
+    if(table[i] != NULL)
+    {
+      if(table[i]->getKey() == key)
+        doesExist = true;
+    }
+  }
+
+  if(doesExist)
+  {
+    cout << "item already present" << endl;
+    return;
+  }
+
   used++;
 
   if(used/(double)TABLE_SIZE >= 0.7)
@@ -99,13 +116,19 @@ void HashTable::insert(int key, Student value)
       if(this->mode == 1) // Linear Probing
         index = (index + 1) % TABLE_SIZE;
       else if(this->mode == 2) // Double Hashing
-      {  
-        index = (index + i*hash2(key)) % TABLE_SIZE;
+      {
+	int h2 = hash2(key);
+	if(h2 == 0)
+	{
+	  h2 = 1;
+	}
+        index = (index + i*h2) % TABLE_SIZE;
         i++;
       }
     }
   } 
-  if (table[index] != NULL)
+
+  if(table[index] != NULL)
     delete table[index];
 
   table[index] = new HashEntry(key, value);
@@ -172,7 +195,11 @@ void HashTable::print()
   {
 
     if(table[i] != NULL && table[i]->getKey() != -1)
-      cout << "(" << table[i]->getKey() << "," << table[i]->getValue().getName() << "," << table[i]->getValue().getGPA() << ")";
+    {
+      cout << "(" << table[i]->getKey() << "," << table[i]->getValue().getName() << ",";
+      cout << std::fixed << std::setprecision(1) << table[i]->getValue().getGPA();
+      cout << ")";
+    }
   
   }
   cout << endl;
