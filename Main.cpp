@@ -3,7 +3,6 @@
 #include <string>
 #include <cstdio>
 #include "Hashtable.h"
-#include "Hashentry.h"
 #include "Student.h"
 
 using namespace std;

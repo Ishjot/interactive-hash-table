@@ -181,10 +181,10 @@ void HashTable::lookup(int key)
     }
   }
   if (table[index] == NULL)
-    cout << "item not present in the table" << endl;
+    cout << "item not found" << endl;
 
   else
-    cout << "item found; " << table[index]->getValue().getName() << " " << table[index]->getValue().getGPA() << endl;
+    cout << "item found; " << table[index]->getValue().getName() << " " << index << endl;
   
 }
 
