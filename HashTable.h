@@ -8,6 +8,8 @@ class HashTable
   private:
     HashEntry **table;
 
+    int mode;
+
     int TABLE_SIZE;
 
     int used;
@@ -35,6 +37,10 @@ class HashTable
     int getTableSize() const { return TABLE_SIZE; }
 
     int getUsed() const { return used; }
+
+    std::string getMode() const;
+
+    void setMode(int mode) { this->mode = mode; }
 
     ~HashTable();
 };

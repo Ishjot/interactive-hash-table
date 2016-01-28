@@ -65,7 +65,9 @@ void reHashHelper(HashEntry **table, int size, int key, Student value)
 HashTable::HashTable()
 {
   
-  TABLE_SIZE = 5;
+  this->TABLE_SIZE = 5;
+  this->mode = 1;
+  this->used = 0;
   table = new HashEntry * [TABLE_SIZE];
   for(int i = 0; i < TABLE_SIZE; i++)
     table[i] = NULL;
@@ -90,9 +92,19 @@ void HashTable::insert(int key, Student value)
     reHash(); 
 
   int index = hash(key);
-  while((table[index] != NULL && table[index]->getKey() != -1) && table[index]->getKey() != key)
-    index = (index + 1) % TABLE_SIZE;
-
+  int i = 1;
+  {
+    while(table[index] != NULL && table[index]->getKey() != -1 && table[index]->getKey() != key)
+    {  
+      if(this->mode == 1) // Linear Probing
+        index = (index + 1) % TABLE_SIZE;
+      else if(this->mode == 2) // Double Hashing
+      {  
+        index = (index + i*hash2(key)) % TABLE_SIZE;
+        i++;
+      }
+    }
+  } 
   if (table[index] != NULL)
     delete table[index];
 
@@ -106,8 +118,17 @@ void HashTable::remove(int key)
 {
 
   int index = hash(key);
+  int i = 1;
   while(table[index] != NULL && table[index]->getKey() != key)
-    index = (index + 1) % TABLE_SIZE;
+  {
+    if(this->mode == 1) // Linear probing
+      index = (index + 1) % TABLE_SIZE;
+    else if(this->mode == 2) // Double hashing
+    {
+      index = (index + i*hash2(key)) % TABLE_SIZE;
+      i++;
+    }
+  }
 
   if(table[index] == NULL)
     cout << "item not present in the table" << endl;
@@ -125,9 +146,17 @@ void HashTable::lookup(int key)
 {
 
   int index = hash(key);
+  int i = 1;
   while(table[index] != NULL && table[index]->getKey() != key)
-    index = (index + 1) % TABLE_SIZE;
-
+  {
+    if(this->mode == 1) // Linear Probing
+      index = (index + 1) % TABLE_SIZE;
+    if(this->mode == 2) // Double Hashing
+    {
+      index = (index + i*hash2(key)) % TABLE_SIZE;
+      i++;
+    }
+  }
   if (table[index] == NULL)
     cout << "item not present in the table" << endl;
 
@@ -171,6 +200,20 @@ void HashTable::reHash()
   TABLE_SIZE = newSize;
 
   cout << "table doubled" << endl;
+
+}
+
+string HashTable::getMode() const
+{
+
+  if( this->mode == 1 )
+    return "linearprobing";
+
+  else if( this-> mode == 2 )
+    return "doublehashing";
+
+  else
+    return "unsupported mode!";
 
 }
 

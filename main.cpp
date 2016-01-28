@@ -29,14 +29,14 @@ int main()
 			{
 				break;
 			}
-//			else if(str.compare("linearprobing") == 0)
-//			{
-//				h.setMode(1);
-//			}
-//			else if(str.compare("doublehashing") == 0)
-//			{
-//				h.setMode(2);
-//			}
+	    else if(str.compare("linearprobing") == 0)
+			{
+				h.setMode(1);
+			}
+			else if(str.compare("doublehashing") == 0)
+			{
+				h.setMode(2);
+			}
 			else if(str.compare("insert") == 0)
 			{
 				int key;
@@ -69,6 +69,10 @@ int main()
       else if(str.compare("used") == 0)
       {
         cout << h.getUsed() << endl;
+      }
+      else if(str.compare("mode") == 0)
+      {
+        cout << h.getMode() << endl;
       }
 			else
 			{
