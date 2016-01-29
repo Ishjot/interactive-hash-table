@@ -50,12 +50,29 @@ int HashTable::hash2(int key)
 
 }
  
-void reHashHelper(HashEntry **table, int size, int key, Student value)
+void reHashHelper(HashEntry **table, int size, int mode, int key, Student value)
 {
 
   int index = ( (key % 492113) % size );
+
+  int i = 1;
+
   while( (table[index] != NULL && table[index]->getKey() != -1) && table[index]->getKey() != key)
-    index = (index + 1) % size;
+  {  
+    if(mode == 1) // Linear Probing
+      index = (index + 1) % size;
+
+    else if(mode == 2) // Double Hashing
+    {
+      int h2 = ((key % 392113) % size);
+      if(h2 == 0)
+      {
+        h2 = 1;
+      }
+      index = (index + i*h2) % size;
+      i++;
+    }
+  }  
 
   if( table[index] != NULL ) 
     delete table[index];
@@ -106,22 +123,22 @@ void HashTable::insert(int key, Student value)
   used++;
 
   if(used/(double)TABLE_SIZE >= 0.7)
-    reHash(); 
+    reHash();
 
   int index = hash(key);
   int i = 1;
   {
     while(table[index] != NULL && table[index]->getKey() != -1 && table[index]->getKey() != key)
     {  
-      if(this->mode == 1) // Linear Probing
+      if(mode == 1) // Linear Probing
         index = (index + 1) % TABLE_SIZE;
-      else if(this->mode == 2) // Double Hashing
+      else if(mode == 2) // Double Hashing
       {
-	int h2 = hash2(key);
-	if(h2 == 0)
-	{
-	  h2 = 1;
-	}
+	      int h2 = hash2(key);
+	      if(h2 == 0)
+	      {
+	        h2 = 1;
+	      }
         index = (index + i*h2) % TABLE_SIZE;
         i++;
       }
@@ -214,7 +231,7 @@ void HashTable::reHash()
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     if(table[i] != NULL && table[i]->getKey() != -1)
-      reHashHelper( newTable, newSize, table[i]->getKey(), table[i]->getValue() );
+      reHashHelper( newTable, newSize, mode, table[i]->getKey(), table[i]->getValue() );
   }
 
   for(int i = 0; i< TABLE_SIZE; i++)
