@@ -1,4 +1,4 @@
-OBJS = HashTable.o main.o
+OBJS = Hashtable.o Main.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
@@ -7,11 +7,11 @@ LFLAGS = -Wall $(DEBUG)
 proj1: $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o proj1
 
-HashTable.o: HashTable.cpp HashTable.h HashEntry.h
-	$(CC) $(CFLAGS) HashTable.cpp
+Hashtable.o: Hashtable.cpp Hashtable.h
+	$(CC) $(CFLAGS) Hashtable.cpp
 
-main.o: main.cpp HashTable.h HashEntry.h Student.h
-	$(CC) $(CFLAGS) main.cpp
+Main.o: Main.cpp Hashtable.h Student.h
+	$(CC) $(CFLAGS) Main.cpp
 
 clean:
 	\rm *.o  proj1
